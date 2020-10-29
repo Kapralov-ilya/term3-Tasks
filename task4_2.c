@@ -19,8 +19,8 @@ void copy_string(int sourceFile,int destinationFile)
 {
 	int letter='a',result;
 	while (letter!='\n'){
-       		result=read(sourceFile,&letter,1);
-       		if (result==-1){
+		result=read(sourceFile,&letter,1);
+		if (result==-1){
 			perror("read");
 			exit(1);
 		}
