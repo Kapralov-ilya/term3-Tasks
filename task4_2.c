@@ -4,13 +4,13 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-char *generateFile(const char *string)
+char *generate_file(const char *string)
 {
 	int length=strlen(string);
 	char *filename;
 	filename=malloc(length+8);
 	memcpy(filename ,string ,length);
-        memcpy(filename+length,"_sorted",8);
+	memcpy(filename+length,"_sorted",8);
 	filename[length+7]='\0';
 	return filename;
 }
