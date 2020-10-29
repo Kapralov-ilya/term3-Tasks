@@ -8,8 +8,7 @@
 
 const int sizeOfString 10
 
-typedef struct list
-{
+typedef struct list{
         char *string;
         int vogue;
         struct list *next;
