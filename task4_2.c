@@ -15,7 +15,7 @@ char *generate_file(const char *string)
 	return filename;
 }
 
-void copystring(int sourceFile, int destinationFile)
+void copy_string(int sourceFile, int destinationFile)
 {
 	int letter='a',result;
 	while (letter!='\n'){
@@ -32,7 +32,7 @@ void copystring(int sourceFile, int destinationFile)
 	}
 }
 
-void sortfile(int sourceFile, int destinationFile, int maxlength)
+void sort_file(int sourceFile, int destinationFile, int maxlength)
 {
 	int counter, letter='a', result, currentlength;
 	for(counter=1; counter<=maxlength; counter++){
@@ -68,14 +68,14 @@ int main(int argc,char **argv)
 		perror(argv[1]);
 		exit(1);
 	}
-	nameFile=generateFile(argv[1]);
+	nameFile=generate_file(argv[1]);
 	maxlength=atoi(argv[2]);
 	destinationFile=open(nameFile,O_WRONLY|O_TRUNC|O_CREAT,0644);
 	if (destinationFile==-1){
 		perror(nameFile);
 		exit(1);
 	}
-	sortfile(sourceFile , destinationFile,maxlength);
+	sort_file(sourceFile , destinationFile,maxlength);
 	close(sourceFile);
 	close(destinationFile);
 	free(nameFile);
