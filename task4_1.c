@@ -71,7 +71,7 @@ list *create_list(){
                         tempary=tempary->next;
                 }
                 if (!flag){
-                        mainlist=addfirst(mainlist,filestring);
+                        mainlist=add_first(mainlist,filestring);
                 }
         }
         return mainlist;
