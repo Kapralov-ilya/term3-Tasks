@@ -6,16 +6,17 @@
 #include <sys/stat.h>
 #include <string.h>
 
-#define SIZESTRING 10
+const int sizeOfString 10
 
-typedef struct list{
+typedef struct list
+{
         char *string;
         int vogue;
         struct list *next;
 } list;
 
-char *contentstring(){
-        int stringCounter,sizeCounter,size=SIZESTRING;
+char *content_string(){
+        int stringCounter,sizeCounter,size=sizeOfString;
         char letter,*stringOfFile=NULL;
         stringCounter=sizeCounter=0;
         letter=getchar();
@@ -23,8 +24,8 @@ char *contentstring(){
                 if (stringCounter==0){
                         stringOfFile=malloc(size+1);
                 }else{
-                        if (sizeCounter==SIZESTRING-1){
-                                size+=SIZESTRING;
+                        if (sizeCounter==sizeOfString-1){
+                                size+=sizeOfString;
                                 stringOfFile=realloc(stringOfFile,size+1);
                                 sizeCounter=0;
                         }
@@ -44,7 +45,7 @@ char *contentstring(){
         return stringOfFile;
 }
 
-list *addfirst(list *mainlist, char *filestring){
+list *add_first(list *mainlist, char *filestring){
         list *tempary;
         tempary=malloc(sizeof(list));
         tempary->string=filestring;
@@ -53,10 +54,10 @@ list *addfirst(list *mainlist, char *filestring){
         return tempary;
 }
 
-list *createlist(){
+list *create_list(){
         int flag;
         char *filestring;
-        list *mainlist=NULL,*tempary;
+        list *mainlist=NULL, *tempary;
         while ((filestring=contentstring())){
                 flag=0;
                 tempary=mainlist;
@@ -76,9 +77,7 @@ list *createlist(){
         return mainlist;
 }
 
-
-
-int searchmax(list *mainlist){
+int search_max(list *mainlist){
         int max=0;
         while (mainlist){
                 if ((mainlist->vogue)>max){
@@ -89,7 +88,7 @@ int searchmax(list *mainlist){
         return max;
 }
 
-void freecontent(list *mainlist){
+void free_content(list *mainlist){
         list *tempary;
         while (mainlist){
                 free(mainlist->string);
@@ -99,7 +98,7 @@ void freecontent(list *mainlist){
         }
 }
 
-int main(int argc,char **argv){
+int main(int argc, char **argv){
         int filedescriptor,maxvogue;
         list *contentFile,*tempary;
         if (argc!=2){
@@ -112,9 +111,9 @@ int main(int argc,char **argv){
                 exit(1);
         }
         dup2(filedescriptor,0);
-        contentFile=createlist();
+        contentFile=create_list();
         tempary=contentFile;
-        maxvogue=searchmax(contentFile);
+        maxvogue=search_max(contentFile);
         tempary=contentFile;
         while (tempary){
                 if ((tempary->vogue)==maxvogue){
@@ -122,7 +121,7 @@ int main(int argc,char **argv){
                 }
                 tempary=tempary->next;
         }
-        freecontent(contentFile);
+        free_content(contentFile);
         setbuf(stdin,NULL);
         setbuf(stdout,NULL);
         close(filedescriptor);
