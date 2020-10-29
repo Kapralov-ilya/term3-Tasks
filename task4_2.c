@@ -9,7 +9,7 @@ char *generate_file(const char *string)
 	int length=strlen(string);
 	char *filename;
 	filename=malloc(length+8);
-	memcpy(filename ,string ,length);
+	memcpy(filename,string,length);
 	memcpy(filename+length,"_sorted",8);
 	filename[length+7]='\0';
 	return filename;
@@ -34,8 +34,8 @@ void copy_string(int sourceFile,int destinationFile)
 
 void sort_file(int sourceFile,int destinationFile,int maxlength)
 {
-	int counter, letter='a', result, currentlength;
-	for(counter=1; counter<=maxlength; counter++){
+	int counter,letter='a',result,currentlength;
+	for(counter=1;counter<=maxlength;counter++){
 		lseek(sourceFile,0,0);
 		currentlength=0;
 		while ((result=read(sourceFile,&letter,1))!=0){
