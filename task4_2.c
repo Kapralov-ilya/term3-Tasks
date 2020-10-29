@@ -21,7 +21,7 @@ void copy_string(int sourceFile,int destinationFile)
 	while (letter!='\n'){
        		result=read(sourceFile,&letter,1);
        		if (result==-1){
-       		    perror("read");
+			perror("read");
 			exit(1);
 		}
 		result=write(destinationFile,&letter,1);
