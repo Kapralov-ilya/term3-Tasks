@@ -8,13 +8,15 @@
 
 #define SIZESTRING 10
 
-typedef struct list{
+typedef struct list
+{
         char *string;
         int vogue;
         struct list *next;
 } list;
 
-char *contentstring(){
+char *contentstring()
+{
         int stringCounter,sizeCounter,size=SIZESTRING;
         char letter,*stringOfFile=NULL;
         stringCounter=sizeCounter=0;
@@ -44,7 +46,8 @@ char *contentstring(){
         return stringOfFile;
 }
 
-list *addfirst(list *mainlist, char *filestring){
+list *addfirst(list *mainlist, char *filestring)
+{
         list *tempary;
         tempary=malloc(sizeof(list));
         tempary->string=filestring;
@@ -53,7 +56,8 @@ list *addfirst(list *mainlist, char *filestring){
         return tempary;
 }
 
-list *createlist(){
+list *createlist()
+{
         int flag;
         char *filestring;
         list *mainlist=NULL,*tempary;
@@ -78,7 +82,8 @@ list *createlist(){
 
 
 
-int searchmax(list *mainlist){
+int searchmax(list *mainlist)
+{
         int max=0;
         while (mainlist){
                 if ((mainlist->vogue)>max){
@@ -89,7 +94,8 @@ int searchmax(list *mainlist){
         return max;
 }
 
-void freecontent(list *mainlist){
+void freecontent(list *mainlist)
+{
         list *tempary;
         while (mainlist){
                 free(mainlist->string);
@@ -99,7 +105,8 @@ void freecontent(list *mainlist){
         }
 }
 
-int main(int argc,char **argv){
+int main(int argc,char **argv)
+{
         int filedescriptor,maxvogue;
         list *contentFile,*tempary;
         if (argc!=2){
