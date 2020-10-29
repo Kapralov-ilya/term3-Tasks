@@ -20,7 +20,7 @@ char *content_string(){
         char letter,*stringOfFile=NULL;
         stringCounter=sizeCounter=0;
         letter=getchar();
-        while (letter!=EOF && letter!='\n' ){
+        while (letter!=EOF && letter!='\n'){
                 if (stringCounter==0){
                         stringOfFile=malloc(size+1);
                 }else{
