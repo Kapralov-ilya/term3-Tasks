@@ -7,7 +7,7 @@
 #include <sys/types.h>
 #include <fcntl.h>
 
-#define BLOCKSIZE 16
+const int BLOCKSIZE 16
 
 typedef struct list{
 	char *word;
