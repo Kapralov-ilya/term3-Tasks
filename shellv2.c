@@ -27,8 +27,9 @@ char *createString(){
 	char *string=NULL;
 	int ch,i=0,multiplier=0;
 	ch=getchar();
-	while (ch!=EOF && ch!='\n'){
-		if (i==mul*BLOCKSIZE){
+	int string_end=(ch!=EOF && ch!='\n');
+	while (string_end){
+		if (i==multiplier*BLOCKSIZE){
 			multiplier++;
 			string=realloc(string,multiplier*BLOCKSIZE+1);
 		}
