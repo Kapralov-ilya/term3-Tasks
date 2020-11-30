@@ -8,6 +8,7 @@
 #include <fcntl.h>
 
 const int BLOCKSIZE 16
+const int delimiter=(sym=='\0'||sym=='<'||sym=='&'||sym=='|'||sym=='\t'||sym=='>'||sym==';'||sym==' ');
 
 typedef struct list{
 	char *word;
@@ -126,11 +127,6 @@ int specialSymbol(const char *string,int current,list **parslist){
 	}
 }
 
-int delimiter(int sym){
-	return (sym=='\0'||sym=='<'||sym=='&'||sym=='|'||
-			sym=='\t'||sym=='>'||sym==';'||sym==' ');
-}
-
 list *parsing(const char *string){
 	int i=0,j;
 	char parsword[strlen(string)+1];
@@ -141,7 +137,7 @@ list *parsing(const char *string){
 	}
 	while (string[i]!='\0'){
 		j=0;
-		while (!delimiter(string[i])){
+		while (string[i]!=delimiter){
 			while(string[i]=='"'){
 				i++;
 				while(string[i]!='"'){
@@ -151,7 +147,7 @@ list *parsing(const char *string){
                                 }
                                 i++;
                         }
-                        if (!delimiter(string[i])){
+                        if (string[i]!=delimiter){
                                 parsword[j]=string[i];
                                 j++;
                                 i++;
