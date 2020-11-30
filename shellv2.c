@@ -213,32 +213,32 @@ void printWords(char **mass){
 }
 
 void freeList(list *main){
-	list *tmp;
+	list *tempary;
 	while (main){
-		tmp=main;
+		tempary=main;
 		main=main->next;
-		free(tmp->word);
-		free(tmp);
+		free(tempary->word);
+		free(tempary);
 	}
 }
 
-int isArrow(list *tmp){
-	char *str=tmp->word;
+int isArrow(list *tempary){
+	char *str=tempary->word;
 	return (!strcmp(str,">")||!strcmp(str,"<")||!strcmp(str,">>"));
 }
 
 list *deleteElem(list *main,list *del){
-	list *tmp;
+	list *tempary;
 	if (main==del){
 		main=main->next;
 		free(del->word);
 		free(del);
 	}else{
-		tmp=main;
-		while (tmp->next!=del){
-			tmp=tmp->next;
+		tempary=main;
+		while (tempary->next!=del){
+			tempary=tempary->next;
 		}
-		tmp->next=del->next;
+		tempary->next=del->next;
 		free(del->word);
 		free(del);
 	}
@@ -247,10 +247,10 @@ list *deleteElem(list *main,list *del){
 
 list *deleteArrows(list *main){
 	char mask[sizeList(main)];
-	list *tmp,*del;
+	list *tempary,*del;
 	int i,flag=0;
-	tmp=main;
-	for(i=0;tmp;i++){
+	tempary=main;
+	for(i=0;tempary;i++){
 		mask[i]=0;
 		if (flag){
 			flag=0;
@@ -260,16 +260,16 @@ list *deleteArrows(list *main){
 			flag=1;
 			mask[i]=1;
 		}
-		tmp=tmp->next;
+		tempary=tempary->next;
 	}
-	tmp=main;
-	for(i=0;tmp;i++){
+	tempary=main;
+	for(i=0;tempary;i++){
 		if (mask[i]){
-			del=tmp;
-			tmp=tmp->next;
+			del=tempary;
+			tempary=tempary->next;
 			main=deleteElem(main,del);
 		}else{
-			tmp=tmp->next;
+			tempary=tempary->next;
 		}
 	}
 	return main;
