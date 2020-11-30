@@ -193,7 +193,8 @@ char **listToMassive(list **parslist,int prog){
 	int i=0;
 	char **result;
 	result=malloc((wordsBeforePipe(*parslist)+1)*sizeof(char*));
-	while (*parslist && strcmp(((*parslist)->word),"|")){
+	int separator=(*parslist && strcmp(((*parslist)->word),"|"));
+	while (!separator){
 		result[i]=strdup((*parslist)->word);
 		*parslist=(*parslist)->next;
 		i++;
