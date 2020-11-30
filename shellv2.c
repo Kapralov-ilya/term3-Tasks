@@ -16,10 +16,10 @@ typedef struct list{
 } list;
 
 typedef struct redirection{
-	const char *input_file;
-	const char *output_file;
-	int input_fd;
-	int output_fd;
+	const char *inputFile;
+	const char *outputFile;
+	int inputFd;
+	int outputFd;
 	int append;
 	int error;
 } redirection ;
@@ -273,10 +273,10 @@ list *deleteArrows(list *main){
 }
 
 void initializRedirection(redirection *redir){
-	redir->input_file=NULL;
-	redir->output_file=NULL;
-	redir->input_fd=-1;
-	redir->output_fd=-1;
+	redir->inputFile=NULL;
+	redir->outputFile=NULL;
+	redir->inputFd=-1;
+	redir->outputFd=-1;
 	redir->error=0;
 	redir->append=0;
 }
@@ -286,7 +286,7 @@ redirection analysisArrows(list *main){
 	initializRedirection(&redir);
 	while (main){
 		if (!strcmp(main->word,"<")){
-			if (redir.input_file){
+			if (redir.inputFile){
 				fprintf(stderr,"Same input redirection\n");
 				redir.error=1;
 				return redir;
@@ -297,10 +297,10 @@ redirection analysisArrows(list *main){
 				return redir;
 			}
 			main=main->next;
-			redir.input_file=strdup(main->word);
+			redir.inputFile=strdup(main->word);
 		}
 		if (!strcmp(main->word,">")){
-			if (redir.output_file){
+			if (redir.outputFile){
 				fprintf(stderr,"Same output redirection\n");
 				redir.error=1;
 				return redir;
@@ -311,10 +311,10 @@ redirection analysisArrows(list *main){
 				return redir;
 			}
 			main=main->next;
-			redir.output_file=strdup(main->word);
+			redir.outputFile=strdup(main->word);
 		}
 		if (!strcmp(main->word,">>")){
-			if (redir.output_file){
+			if (redir.outputFile){
 				fprintf(stderr,"Same output redirection\n");
 				redir.error=1;
 				return redir;
@@ -325,7 +325,7 @@ redirection analysisArrows(list *main){
 				return redir;
 			}
 			main=main->next;
-			redir.output_file=strdup(main->word);
+			redir.outputFile=strdup(main->word);
 			redir.append=1;
 		}
 		main=main->next;
@@ -453,10 +453,10 @@ void execute(list *command,redirection data,int background){
 		}
 		if ((pids[i]=fork())==0){
 			if (prev==-1){
-				if (data.input_file){
-					fdin=open(data.input_file,O_RDONLY);
+				if (data.inputFile){
+					fdin=open(data.inputFile,O_RDONLY);
 					if (fdin==-1){
-						perror(data.input_file);
+						perror(data.inputFile);
 						exit(1);
 					}
 					dup2(fdin,0);
@@ -466,11 +466,11 @@ void execute(list *command,redirection data,int background){
 				close(prev);
 			}
 			if (i==count-1){
-				if (data.output_file){
+				if (data.outputFile){
 					flag = data.append ? O_APPEND : O_TRUNC;
-					fdout=open(data.output_file,O_WRONLY|O_CREAT|flag,0644);
+					fdout=open(data.outputFile,O_WRONLY|O_CREAT|flag,0644);
 					if (fdout==-1){
-						perror(data.output_file);
+						perror(data.outputFile);
 						exit(1);
 					}
 					dup2(fdout,1);
@@ -534,14 +534,14 @@ void mainLoop(){
 }
         
 int main(int argc,char **argv){
-	int file_descriptor;
+	int fileDescriptor;
 	if (argc==2){
 		file_descriptor=open(argv[1],O_RDONLY);
 		if (fd==-1){
 			perror(argv[1]);
 			exit(1);
 		}
-		dup2(file_descriptor,0);
+		dup2(fileDescriptor,0);
 	}
 	mainLoop();
 	return 0;
