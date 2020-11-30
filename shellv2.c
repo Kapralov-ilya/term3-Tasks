@@ -25,12 +25,12 @@ typedef struct redirection{
 
 char *createString(){
 	char *string=NULL;
-	int ch,i=0,mul=0;
+	int ch,i=0,multiplier=0;
 	ch=getchar();
 	while (ch!=EOF && ch!='\n'){
 		if (i==mul*BLOCKSIZE){
-			mul++;
-			string=realloc(string,mul*BLOCKSIZE+1);
+			multiplier++;
+			string=realloc(string,multiplier*BLOCKSIZE+1);
 		}
 		string[i]=ch;
 		i++;
@@ -48,20 +48,20 @@ char *createString(){
 }
 
 list *addToList(list *main,const char *parsword){
-	list *tmp;
+	list *tempary;
 	if (main){
-		tmp=main;
-		while (tmp->next){
+		tempary=main;
+		while (tempary->next){
 		tmp=tmp->next;
 	}
-	tmp->next=malloc(sizeof(list));
-	tmp=tmp->next;
+	tempary->next=malloc(sizeof(list));
+	tempary=tempary->next;
 	}else{
 		main=malloc(sizeof(list));
-		tmp=main;
+		tempary=main;
 	}
-	tmp->word=strdup(parsword);
-	tmp->next=NULL;
+	tempary->word=strdup(parsword);
+	tempary->next=NULL;
 	return main;
 }
 
@@ -85,6 +85,7 @@ int checkQuotes(const char *string){
 }
 
 int specialSymbol(const char *string,int current,list **parslist){
+	int string_slash=(string[current+1]=='|');
 	switch (string[current]){
 		case '&':
 			if (string[current+1]=='&'){
@@ -94,7 +95,7 @@ int specialSymbol(const char *string,int current,list **parslist){
 			*parslist=addToList(*parslist,"&");
 			return current+1;
 		case '|':
-			if (string[current+1]=='|'){
+			if (string_slash){
 				*parslist=addToList(*parslist,"||");
 				return current+2;
 			}
@@ -535,14 +536,14 @@ void mainLoop(){
 }
         
 int main(int argc,char **argv){
-	int fd;
+	int file_descriptor;
 	if (argc==2){
-		fd=open(argv[1],O_RDONLY);
+		file_descriptor=open(argv[1],O_RDONLY);
 		if (fd==-1){
 			perror(argv[1]);
 			exit(1);
 		}
-		dup2(fd,0);
+		dup2(file_descriptor,0);
 	}
 	mainLoop();
 	return 0;
