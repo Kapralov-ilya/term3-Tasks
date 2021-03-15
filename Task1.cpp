@@ -3,8 +3,6 @@
 
 using namespace std;
 
-#define WORDSIZE 5
-
 class array_string{
         char **array;
         int available;
