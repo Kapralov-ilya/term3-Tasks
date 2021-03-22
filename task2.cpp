@@ -6,14 +6,14 @@ class Matrix{
         float **array;
         int rows;
         int columns;
+        inline int getRows() const{return rows;}
+        inline int getColumns() const{return columns;}
 public:
         Matrix(const int numRows,const int numColumns);
         Matrix(const Matrix& matrix1);
         ~Matrix();
         void inputMatrix();
         void printMatrix() const;
-        inline int getRows() const{return rows;}
-        inline int getColumns() const{return columns;}
         friend Matrix operator*(const Matrix& matrix1, const Matrix& matrix2);
         friend Matrix operator*(const Matrix& matrix1, float alpha);
         friend Matrix operator*(float alpha,const Matrix& matrix1);
@@ -101,7 +101,7 @@ int main(){
         cout<<"3-exit\n";
         Matrix *first,*second;
         try{
-        while (true){
+            while (true){
                 cout<<"choice:";
                 cin>>choice;
                 switch (choice){
@@ -144,7 +144,7 @@ int main(){
                         default:
                                 cout<<"Try again"<<endl;
                 }
-        }
+            }
         }
         catch(const char *reaction){
             cerr << reaction << endl;
