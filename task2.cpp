@@ -3,6 +3,7 @@
 using namespace std;
 
 class Matrix{
+<<<<<<< HEAD
 	float **array;
 	int rows;
 	int columns;
@@ -32,6 +33,38 @@ Matrix::Matrix(const Matrix& matrix1){
 	for(int i=0;i<rows;i++){
 		array[i]=new float[columns];
 		for(int j=0;j<columns;j++){
+=======
+        float **array;
+        int rows;
+        int columns;
+        inline int getRows() const{return rows;}
+        inline int getColumns() const{return columns;}
+public:
+        Matrix(const int numRows,const int numColumns);
+        Matrix(const Matrix& matrix1);
+        ~Matrix();
+        void inputMatrix();
+        void printMatrix() const;
+        friend Matrix operator*(const Matrix& matrix1, const Matrix& matrix2);
+        friend Matrix operator*(const Matrix& matrix1, float alpha);
+        friend Matrix operator*(float alpha,const Matrix& matrix1);
+};
+
+Matrix::Matrix(const int numRows=1,const int numColumns=1){
+        rows=numRows;
+        columns=numColumns;
+        array=new float*[rows];
+        for(int i=0;i<rows;i++) array[i]=new float[columns];
+}
+
+Matrix::Matrix(const Matrix& matrix1){
+        rows=matrix1.rows;
+        columns=matrix1.columns;
+        array=new float*[rows];
+        for(int i=0;i<rows;i++){
+                array[i]=new float[columns];
+                for(int j=0;j<columns;j++){
+>>>>>>> a44c76ac290011181731831a83234637329082f4
                         array[i][j]=matrix1.array[i][j];
                 }
         }
@@ -100,7 +133,11 @@ int main(){
         cout<<"3-exit\n";
         Matrix *first,*second;
         try{
+<<<<<<< HEAD
         while (true){
+=======
+            while (true){
+>>>>>>> a44c76ac290011181731831a83234637329082f4
                 cout<<"choice:";
                 cin>>choice;
                 switch (choice){
@@ -143,7 +180,11 @@ int main(){
                         default:
                                 cout<<"Try again"<<endl;
                 }
+<<<<<<< HEAD
         }
+=======
+            }
+>>>>>>> a44c76ac290011181731831a83234637329082f4
         }
         catch(const char *reaction){
             cerr << reaction << endl;
